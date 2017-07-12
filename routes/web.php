@@ -19,12 +19,28 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+/**
+ * Student Routes
+ */
 Route::get('/student', 'StudentsController@index');
 Route::post('/student', 'StudentsController@store');
 
-
+/**
+ * Course Routes
+ */
 Route::get('/course',function (){
     return view('courses');
 });
 Route::post('/course', 'CoursesController@store');
+
+/**
+ * Route For PDF Certificate
+ */
+Route::get('pdfview',array('as'=>'pdfview','uses'=>'PDFController@pdfview'));
+
+/**
+ * Route for the chart
+ */
+Route::get('chartjs', 'StatisticsController@appReceived');
+
+

@@ -45,8 +45,38 @@
                         @if (Auth::guest())
 
                         @else
-                            <li><a href="{{ route('register') }}">Add User</a></li>
-                            <li><a href="{{ url('/course') }}">Add Course</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Data Entry <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('register') }}">
+                                            Add User
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/course') }}">
+                                            Add Course
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ url('pdfview') }}">PDF Certificates</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Reports <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('chartjs') }}">
+                                            Applications Received
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
