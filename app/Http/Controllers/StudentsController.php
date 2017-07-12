@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
 use Illuminate\Http\Request;
+use App\Course;
+use App\Student;
+use Illuminate\Support\Facades\Input;
+use Event;
+use App\Events\RequestEvent;
 
 class StudentsController extends Controller
 {
@@ -14,6 +20,8 @@ class StudentsController extends Controller
     public function index()
     {
         //
+        $courses=Course::pluck('courseName','id')->toArray();
+        return view('students', ['courses'=> $courses]);
     }
 
     /**
@@ -32,9 +40,26 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         //
+        $student=new Student();
+        $student->firstName=Input::get('fName');
+        $student->lastName=Input::get('lName');
+        $student->email=Input::get('email');
+        $student->dob=Input::get('dob');
+        $student->doa=Input::get('doa');
+        $student->courseId=Input::get('courses');
+        $student->save();
+
+        if($student){
+            Event::fire(new RequestEvent($student->id));
+            \Session::flash('message', 'Successfully Registered!');
+            return redirect()->action('StudentsController@index');
+        }else{
+            \Session::flash('message', 'Failed!');
+            return redirect()->action('StudentsController@index');
+        }
     }
 
     /**

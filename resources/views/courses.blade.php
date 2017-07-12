@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Course Entry Form</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="">
+                        <form class="form-horizontal" method="POST" action="/course">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('courseName') ? ' has-error' : '' }}">
@@ -18,7 +18,7 @@
 
                                     @if ($errors->has('courseName'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('courseName') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('courseName') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -32,11 +32,17 @@
 
                                     @if ($errors->has('duration'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('duration') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('duration') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+                            @if(Session::has('message'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="alert-link close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <span class="glyphicon glyphicon-ok"></span><em> {!! session('message') !!}</em>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

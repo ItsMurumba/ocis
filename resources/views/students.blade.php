@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Students Registration Form</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="">
+                        <form class="form-horizontal" method="POST" action="student">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -18,7 +18,7 @@
 
                                     @if ($errors->has('fName'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('fName') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('fName') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -31,7 +31,7 @@
 
                                     @if ($errors->has('lName'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('lName') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('lName') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -46,7 +46,7 @@
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -59,7 +59,7 @@
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('dob') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('dob') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -72,26 +72,29 @@
 
                                     @if ($errors->has('doa'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('doa') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('doa') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
-                                <label for="course" class="col-md-4 control-label">Course</label>
+                            <div class="form-group{{ $errors->has('courses') ? ' has-error' : '' }}">
+                                <label for="courses" class="col-md-4 control-label">Course</label>
 
                                 <div class="col-md-6">
-                                    <input id="course" type="text" class="form-control" name="course" value="{{ old('course') }}" required>
-
-                                    @if ($errors->has('course'))
+                                    {{ Form::select('courses', $courses, null,  ['class' => 'form-control']) }}
+                                    @if ($errors->has('courses'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('course') }}</strong>
+                                        <strong style="color: red">{{ $errors->first('courses') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
-
-
+                            @if(Session::has('message'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="alert-link close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <span class="glyphicon glyphicon-ok"></span><em> {!! session('message') !!}</em>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

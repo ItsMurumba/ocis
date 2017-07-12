@@ -19,13 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/student',function (){
-    return view('students');
-});
-Route::post('/student', 'StudentsController@index');
+
+Route::get('/student', 'StudentsController@index');
+Route::post('/student', 'StudentsController@store');
 
 
 Route::get('/course',function (){
     return view('courses');
 });
-Route::post('/course', 'CoursesController@index');
+Route::post('/course', 'CoursesController@store');
