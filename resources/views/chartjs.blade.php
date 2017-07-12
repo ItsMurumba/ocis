@@ -5,8 +5,6 @@
     <script>
         var date = <?php echo $label; ?>;
         var data_applications_received = <?php echo $data; ?>;
-        alert(data_applications_received);
-
         var barChartData = {
             labels: date,
             datasets: [{
